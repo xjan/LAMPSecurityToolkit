@@ -64,6 +64,6 @@ class RemoteURLIncludeTest extends SecurityTest {
 				$result->setCode(SecurityTestResult::OK);
 			}
 		}
-        return $result;
+		return $result;
 	}
 }
