@@ -50,4 +50,24 @@ class SecurityTest {
 		$result = &new SecurityTestResult();
         return $result;
 	}
+	
+	/**
+	 * This function indicates, that the test can be run in CLI mode. The default is true.
+	 * @return bool
+	 */
+	function supportsCLI() {
+		return true;
+	}
+	
+	/**
+	 * Returns, if the test is being run on a webserver.
+	 * @return bool
+	 */
+	function runsInServer() {
+		if (PHP_SAPI === 'cli') {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

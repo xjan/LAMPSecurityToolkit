@@ -40,6 +40,11 @@ class SecurityTestResult {
 	 */
 	var $description = '';
 	/**
+	 * The test object this result belongs to.
+	 * @var SecurityTest
+	 */
+	var $test = null;
+	/**
 	 * Set one of the following codes:
 	 * 
 	 * SecurityTestResult::OK
@@ -93,6 +98,22 @@ class SecurityTestResult {
 	 */
 	function getDescription() {
 		return $this->description;
+	}
+	/**
+	 * Set the test this test result belongs to.
+	 * @param SecurityTest $test 
+	 * @return SecurityTestResult
+	 */
+	function setTest(&$test) {
+		$this->test = $test;
+		return $this;
+	}
+	/**
+	 * Returns the test this result belongs to if applicable.
+	 * @return SecurityTest
+	 */
+	function getTest() {
+		return $this->test;
 	}
 	/**
 	 * Convert test result to JSON. Doesn't work perfectly without the built-in JSON module, but it does the job
