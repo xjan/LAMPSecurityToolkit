@@ -29,7 +29,7 @@ class HTTPOnlySIDCookieTest extends SecurityTest {
 	 * @return string
 	 */
 	function getDescription() {
-		return 'Checks, if the session.cookie_httponly option is disabled.';
+		return 'Checks, if the session.cookie_httponly option is enabled.';
 	}
 	/**
 	 * Returns the link to the details page of this issue.

@@ -29,7 +29,7 @@ class TransparentSIDTest extends SecurityTest {
 	 * @return string
 	 */
 	function getDescription() {
-		return 'Checks, if the session.use_trans_sid option is enabled.';
+		return 'Checks, if the session.use_trans_sid option is disabled.';
 	}
 	/**
 	 * Returns the link to the details page of this issue.

@@ -29,7 +29,7 @@ class RemoteURLIncludeTest extends SecurityTest {
 	 * @return string
 	 */
 	function getDescription() {
-		return 'Checks, if allow_url_include is enabled.';
+		return 'Checks, if allow_url_include is disabled.';
 	}
 	/**
 	 * Returns the link to the details page of this issue.

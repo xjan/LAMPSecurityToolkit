@@ -29,7 +29,7 @@ class ShadowPermissionTest extends SecurityTest {
 	 * @return string
 	 */
 	function getDescription() {
-		return 'Checks, if the /etc/shadow or the /etc/shadow- file is readable by PHP.';
+		return 'Checks, if the /etc/shadow or the /etc/shadow- file is not readable by PHP.';
 	}
 	/**
 	 * Returns the link to the details page of this issue.

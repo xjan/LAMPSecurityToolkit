@@ -29,7 +29,7 @@ class RootPermissionTest extends SecurityTest {
 	 * @return string
 	 */
 	function getDescription() {
-		return 'Checks, if the /root directory is readable by PHP.';
+		return 'Checks, if the /root directory is not readable by PHP.';
 	}
 	/**
 	 * Returns the link to the details page of this issue.

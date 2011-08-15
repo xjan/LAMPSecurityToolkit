@@ -29,7 +29,7 @@ class RegisterGlobalsTest extends SecurityTest {
 	 * @return string
 	 */
 	function getDescription() {
-		return 'Checks, if register_globals is set to on.';
+		return 'Checks, if register_globals is disabled.';
 	}
 	/**
 	 * Returns the link to the details page of this issue.

@@ -29,7 +29,7 @@ class UseOnlyCookiesTest extends SecurityTest {
 	 * @return string
 	 */
 	function getDescription() {
-		return 'Checks, if the session.use_only_cookies option is disabled.';
+		return 'Checks, if the session.use_only_cookies option is enabled.';
 	}
 	/**
 	 * Returns the link to the details page of this issue.

@@ -29,7 +29,7 @@ class ModPHPTest extends SecurityTest {
 	 * @return string
 	 */
 	function getDescription() {
-		return 'Checks, the PHP interpreter runs using mod_php.';
+		return 'Checks, the PHP interpreter does not run in mod_php.';
 	}
 	/**
 	 * Returns the link to the details page of this issue.
