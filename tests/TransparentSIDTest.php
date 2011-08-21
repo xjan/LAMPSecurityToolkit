@@ -51,9 +51,11 @@ class TransparentSIDTest extends SecurityTest {
 		if (!is_callable('ini_get')) {
 			$result->setCode(SecurityTestResult::SKIPPED);
 			$result->setDescription('ini_get() is required to run this test.');
+			$result->setLogMessage(&$this, SecurityTestResult::SKIPPED);
 		} else {
 			if (ini_get('session.use_trans_sid')) {
 				$result->setCode(SecurityTestResult::CRITICAL);
+				$result->setLogMessage(&$this, SecurityTestResult::CRITICAL);
 				$result->setDescription('<p>The <a ' .
 						'href="http://www.php.net/manual/en/session.configuration.php#ini.session.use-trans-sid">session.use_trans_sid</a> ' .
 						'option is enabled. This means, that remote sites can steal the session ID using the refererlogs and such! ' .
@@ -61,6 +63,7 @@ class TransparentSIDTest extends SecurityTest {
 						'php.ini: <code>session.use_trans_sid = off</code></p>');
 			} else {
 				$result->setCode(SecurityTestResult::OK);
+				$result->setLogMessage(&$this, SecurityTestResult::OK);
 			}
 		}
 		return $result;

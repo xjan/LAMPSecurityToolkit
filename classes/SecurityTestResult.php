@@ -45,6 +45,12 @@ class SecurityTestResult {
 	 */
 	var $test = null;
 	/**
+	 * The log text.
+	 * @var logMessage
+	 */	
+	var $logMessage = "";
+	
+	/**
 	 * Set one of the following codes:
 	 * 
 	 * SecurityTestResult::OK
@@ -115,6 +121,37 @@ class SecurityTestResult {
 	function getTest() {
 		return $this->test;
 	}
+	
+	/**
+	 * Returns the log Message this result belongs to if applicable.
+	 * @return SecurityTest
+	 */
+	function getLogMessage() {
+		return $this->logMessage;
+	}	
+	
+	/**
+	 * Set the log message this test result belongs to.
+	 * @param logMessage $logMessage 
+	 * @return SecuritylogMessageResult
+	 */
+	function setLogMessage(&$oSecurityTest, $status) {
+			if ( $oSecurityTest instanceof  TransparentSIDTest )
+			{
+				switch ($status)
+				{
+					case SecurityTestResult::SKIPPED:
+						$this->logMessage = $oSecurityTest->getname()."... Skipped.";
+					case SecurityTestResult::CRITICAL:
+						$this->logMessage = $oSecurityTest->getname()."... Critical.";
+					case SecurityTestResult::OK:
+						$this->logMessage = $oSecurityTest->getname()."... Ok.";						
+				}
+			}
+		return $this;
+	}
+	
+	
 	/**
 	 * Convert test result to JSON. Doesn't work perfectly without the built-in JSON module, but it does the job
 	 * good enough.
@@ -126,11 +163,13 @@ class SecurityTestResult {
 		if (function_exists('json_encode')) {
 			$json = json_encode(array(
 				'code' => $this->getCode(),
-				'description' => $this->getDescription()
+				'description' => $this->getDescription(),
+				'logMessage' => $this->getLogMessage()
 			));
 		} else {
 			$json .= '{code:' . $this->getCode() . ',';
 			$json .= 'description:"' . addslashes($this->getDescription()) . '"}';
+			$json .= 'logMessage:"' . addslashes($this->getLogMessage()) . '"}';
 		}
 		return $json;
 	}

@@ -121,6 +121,15 @@ LAMPT = {
 		button.addEventListener('click', LAMPT.startTests, false);
 		button.onclick='return false;';
 		testlist.appendChild(button);
+		
+		var textarea = document.createElement('textarea');
+		textarea.name = 'logArea';
+		textarea.id = 'logArea';
+		textarea.cols = '100';
+		textarea.rows = '10';
+		textarea.value= '';
+		testlist.appendChild(textarea);
+		
 	},
 	startTests: function() {
 		document.getElementById('testbutton').disabled=true;
@@ -157,6 +166,9 @@ LAMPT = {
 		try {
 			var result = JSON.parse(xhr.responseText);
 			var td = document.getElementById('td-' + LAMPT.currentTest);
+			var logArea = document.getElementById('logArea');
+			var logText = logArea.value;
+
 			switch (result.code) {
 				case -1:
 					td.innerHTML = '?';
@@ -180,6 +192,11 @@ LAMPT = {
 					break;
 			}
 			var desc = document.getElementById('desc-' + LAMPT.currentTest);
+			
+			if ( result.logMessage && result.logMessage !=''){
+				logArea.value = logText + '\u000A\u000D' + result.logMessage;
+			}
+			
 			if (result.description != '') {
 				desc.innerHTML = desc.innerHTML + '<hr />' + result.description;
 			}

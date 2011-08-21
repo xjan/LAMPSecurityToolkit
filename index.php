@@ -69,6 +69,7 @@ function listtests() {
 			$json .= 'category:"' . addslashes($testdata['category']) . '",';
 			$json .= 'description:"' . addslashes($testdata['description']) . '",';
 			$json .= 'link:"' . addslashes($testdata['link']) . '"';
+			$json .= 'link:"' . addslashes($testdata['logMessage']) . '"';
 			$json .= '}';
 		}
 		$json .= '}';
