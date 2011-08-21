@@ -51,9 +51,11 @@ class HTTPOnlySIDCookieTest extends SecurityTest {
 		if (!is_callable('ini_get')) {
 			$result->setCode(SecurityTestResult::SKIPPED);
 			$result->setDescription('ini_get() is required to run this test.');
+			$result->setLogMessage(&$this, SecurityTestResult::SKIPPED);
 		} else {
 			if (!ini_get('session.cookie_httponly')) {
 				$result->setCode(SecurityTestResult::WARNING);
+				$result->setLogMessage(&$this, SecurityTestResult::WARNING);
 				$result->setDescription('<p>The <a ' .
 						'href="http://www.php.net/manual/en/session.configuration.php#ini.session.cookie-httponly">session.cookie_httponly</a> ' .
 						'option is disabled. This means, that JavaScript code can access the ' .
@@ -62,6 +64,7 @@ class HTTPOnlySIDCookieTest extends SecurityTest {
 						'<code>session.cookie_httponly = on</code></p>');
 			} else {
 				$result->setCode(SecurityTestResult::OK);
+				$result->setLogMessage(&$this, SecurityTestResult::OK);
 			}
 		}
 		return $result;

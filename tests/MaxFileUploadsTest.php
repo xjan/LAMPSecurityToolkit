@@ -47,16 +47,18 @@ class MaxFileUploadsTest extends SecurityTest {
 	 */
 	function run($params = array()) {
 		$result = &new SecurityTestResult();
-
 		if (!is_callable('ini_get')) {
 			$result->setCode(SecurityTestResult::SKIPPED);
+			$result->setLogMessage(&$this, SecurityTestResult::SKIPPED);
 			$result->setDescription('ini_get() is required to run this test.');
 		} else if (version_compare(PHP_VERSION, '5.2.12', '<')) {
 			$result->setCode(SecurityTestResult::SKIPPED);
 			$result->setDescription('<p>This option is only available from PHP version 5.2.12.</p>');
+			$result->setLogMessage(&$this, SecurityTestResult::SKIPPED, $this->getDescription());
 		} else {
 			if (!ini_get('max_file_uploads') || (ini_get('max_file_uploads') > 100)) {
 				$result->setCode(SecurityTestResult::WARNING);
+				$result->setLogMessage(&$this, SecurityTestResult::WARNING);
 				$result->setDescription('<p>The <a ' .
 						'href="http://www.php.net/manual/en/ini.core.php#ini.max-file-uploads">max_file_uploads</a> ' .
 						'option is not set to a sensible value. This allows a remote attacker ' .
@@ -65,6 +67,7 @@ class MaxFileUploadsTest extends SecurityTest {
 						'<code>max_file_uploads = 100</code></p>');
 			} else {
 				$result->setCode(SecurityTestResult::OK);
+				$result->setLogMessage(&$this, SecurityTestResult::OK);
 			}
 		}
 		return $result;

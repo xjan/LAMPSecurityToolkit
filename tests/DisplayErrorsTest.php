@@ -51,15 +51,18 @@ class DisplayErrorsTest extends SecurityTest {
 		if (!is_callable('ini_get')) {
 			$result->setCode(SecurityTestResult::SKIPPED);
 			$result->setDescription('ini_get() is required to run this test.');
+			$result->setLogMessage(&$this, SecurityTestResult::SKIPPED);
 		} else {
 			if (ini_get('display_errors')) {
 				$result->setCode(SecurityTestResult::CRITICAL);
+				$result->setLogMessage(&$this, SecurityTestResult::CRITICAL);
 				$result->setDescription('<p>The <a href="http://www.php.net/manual/en/errorfunc.configuration.php#ini.display-errors">display_errors</a> ' .
 						'option is set. This allows PHP to write program errors to the browser, thereby revealing ' . 
 						'security-related information. To disable it, set the following option in php.ini: ' . 
 						'<code>display_errors = Off</code></p>');
 			} else {
 				$result->setCode(SecurityTestResult::OK);
+				$result->setLogMessage(&$this, SecurityTestResult::OK);
 			}
 		}
         return $result;

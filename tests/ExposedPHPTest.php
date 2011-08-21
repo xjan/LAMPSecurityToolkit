@@ -51,9 +51,11 @@ class ExposedPHPTest extends SecurityTest {
 		if (!is_callable('ini_get')) {
 			$result->setCode(SecurityTestResult::SKIPPED);
 			$result->setDescription('ini_get() is required to run this test.');
+			$result->setLogMessage(&$this, SecurityTestResult::SKIPPED);
 		} else {
 			if (ini_get('expose_php')) {
 				$result->setCode(SecurityTestResult::CRITICAL);
+				$result->setLogMessage(&$this, SecurityTestResult::CRITICAL);
 				$result->setDescription('<p>The <a href="http://www.php.net/manual/en/ini.core.php#ini.expose-php">expose_php</a> ' .
 						'option is set. This means, an <code>X-Powered-By</code> header is sent ' .
 						'to the browser, which reveals the exact PHP version in use. To disable ' .
@@ -61,6 +63,7 @@ class ExposedPHPTest extends SecurityTest {
 						'<code>expose_php = Off</code></p>');
 			} else {
 				$result->setCode(SecurityTestResult::OK);
+				$result->setLogMessage(&$this, SecurityTestResult::OK);
 			}
 		}
         return $result;
