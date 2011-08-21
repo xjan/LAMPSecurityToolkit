@@ -135,19 +135,42 @@ class SecurityTestResult {
 	 * @param logMessage $logMessage 
 	 * @return SecuritylogMessageResult
 	 */
-	function setLogMessage(&$oSecurityTest, $status) {
-			if ( $oSecurityTest instanceof  TransparentSIDTest )
+	function setLogMessage(&$oSecurityTest, $status, $logText = "") {
+		
+			if ( $oSecurityTest instanceof  SecurityTest )
 			{
 				switch ($status)
 				{
 					case SecurityTestResult::SKIPPED:
-						$this->logMessage = $oSecurityTest->getname()."... Skipped.";
+						if (!$logText){
+							$this->logMessage = $oSecurityTest->getname()."... Skipped.\n";
+						}
+						else {
+							$this->logMessage = $oSecurityTest->getname()."... Skipped.\n".$logText;
+						}
 					case SecurityTestResult::CRITICAL:
-						$this->logMessage = $oSecurityTest->getname()."... Critical.";
+						if (!$logText){
+							$this->logMessage = $oSecurityTest->getname()."... Critical.\n";
+						}
+						else {
+							$this->logMessage = $oSecurityTest->getname()."... Critical.\n".$logText;
+						}
 					case SecurityTestResult::OK:
-						$this->logMessage = $oSecurityTest->getname()."... Ok.";						
+						if (!$logText) {
+							$this->logMessage = $oSecurityTest->getname()."... Ok.\n";
+						}
+						else {
+							$this->logMessage = $oSecurityTest->getname()."... Ok.\n".$logText;
+						}
+					case SecurityTestResult::WARNING:
+						if (!$logText) {
+							$this->logMessage = $oSecurityTest->getname()."... Warning.\n";
+						}
+						else {
+							$this->logMessage = $oSecurityTest->getname()."... Warning.\n".$logText;
+						}
 				}
-			}
+			} 
 		return $this;
 	}
 	

@@ -47,7 +47,6 @@ class TransparentSIDTest extends SecurityTest {
 	 */
 	function run($params = array()) {
 		$result = &new SecurityTestResult();
-		
 		if (!is_callable('ini_get')) {
 			$result->setCode(SecurityTestResult::SKIPPED);
 			$result->setDescription('ini_get() is required to run this test.');

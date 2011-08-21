@@ -47,9 +47,10 @@ class DangerousPHPFunctionsTest extends SecurityTest {
 	 */
 	function run($params = array()) {
 		$result = &new SecurityTestResult();
-		
+		$logtext = "";
 		if (!is_callable('ini_get') || !is_callable('get_defined_functions')) {
 			$result->setCode(SecurityTestResult::SKIPPED);
+			$result->setLogMessage(&$this, SecurityTestResult::SKIPPED);
 			$result->setDescription('ini_get() and get_defined_functions() is required to run this test.');
 		} else {
 			$functionlist = array(
@@ -73,12 +74,17 @@ class DangerousPHPFunctionsTest extends SecurityTest {
 						is_callable($function)) {
 					$rfunctions[$function] = '<a href="http://php.net/' . $function . '"><code>' . $function .
 						'()</code></a>';
+					$logtext .= "\t".$function."...Warning."."\n";
+				} else {
+					$logtext .= "\t".$function."...OK."."\n";
 				}
 			}
 			if (!count($rfunctions)) {
 				$result->setCode(SecurityTestResult::OK);
+				$result->setLogMessage(&$this, SecurityTestResult::OK, $logtext);
 			} else {
 				$result->setCode(SecurityTestResult::WARNING);
+				$result->setLogMessage(&$this, SecurityTestResult::WARNING, $logtext);
 				$disablefunctions = array_merge(array_keys($rfunctions), $dfunctions);
 				$result->setDescription('<p>Some functions, that may be dangerous are available for execution. ' .
 						'Check, if they are needed and disable them, if applicable: ' . implode(', ', $rfunctions) .

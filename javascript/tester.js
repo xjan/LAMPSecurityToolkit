@@ -126,7 +126,7 @@ LAMPT = {
 		textarea.name = 'logArea';
 		textarea.id = 'logArea';
 		textarea.cols = '100';
-		textarea.rows = '10';
+		textarea.rows = '12';
 		textarea.value= '';
 		testlist.appendChild(textarea);
 		
