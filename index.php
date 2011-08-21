@@ -13,6 +13,7 @@ function fatal($error) {
 	@header('Content-Type: text/plain');
 	echo('The test run resulted in a fatal error. The error was: ' . $error);
 	exit;
+	
 }
 
 function loaddir($dir) {
